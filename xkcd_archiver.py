@@ -1,4 +1,7 @@
 #!/bin/python
+# XKCD Comic Archiver
+# xkcd_archiver.py
+# Edward Sandor, January 2023 
 
 import os
 import sys, getopt
