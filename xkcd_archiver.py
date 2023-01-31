@@ -5,6 +5,7 @@
 
 import os
 import sys, getopt
+import datetime
 from   urllib.parse import urlparse
 import urllib.request, json 
 
@@ -12,16 +13,18 @@ version_str="0.0.1-dev"
 publish_year_str="January 2023"
 author_str="Edward Sandor"
 
+title_block_str="XKCD Archiver\n" \
+                "Version " + version_str + "\n" \
+                 + author_str + ", " + publish_year_str
+
 def main(argv):
 
     #Init working variables
     i = 0
     output_dir = "xkcd_archive/"
-    exclusion_list=[0, 404]
+    exclusion_list=[0, 404] # Comics are numbered from #1.  404 was never published (404 not found joke.).
 
-    help_string="XKCD Archiver\n" \
-                "Version " + version_str + "\n" \
-                 + author_str + ", " + publish_year_str + "\n\n" \
+    help_string=title_block_str + "\n\n" \
                 "This script archives all xkcd comics directly from the website.\n\n" \
                 "Arguments:\n" \
                 "   -i <n>,    --initial_comic=<n>  Download all comics starting with #<n>.  If this argument is not provided, this script will start with comic #1.\n" \
@@ -44,9 +47,21 @@ def main(argv):
            print(help_string)
            sys.exit()
 
+    #Validate Arguments
     if(os.path.exists(output_dir)==False):
         print("Output directory '" + output_dir + "' is inaccessible or does not exist.")
         sys.exit(2)
+
+    #Take timestamp for session
+    timestamp_str=str(datetime.datetime.now().astimezone().replace(microsecond=0).isoformat())
+
+    #Output archiving summary
+    archive_summary_str=(title_block_str + "\n\n" \
+                         "Archiving at " + timestamp_str + " starting with comic #" + str(i) +".  Excluding comics " + str(exclusion_list)+ ".\n" \
+                         "Output directory: " + output_dir)
+    print(archive_summary_str+"\n")
+    with open(os.path.join(output_dir, "archive_summary.txt"), "w") as text_file:
+        text_file.write(archive_summary_str)
 
     #Archive all xkcd comics starting at i until error (e.g. 404)
     while(True):
