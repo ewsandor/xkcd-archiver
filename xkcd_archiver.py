@@ -8,6 +8,10 @@ import sys, getopt
 from   urllib.parse import urlparse
 import urllib.request, json 
 
+version_str="0.0.1-dev"
+publish_year_str="January 2023"
+author_str="Edward Sandor"
+
 def main(argv):
 
     #Init working variables
@@ -16,6 +20,8 @@ def main(argv):
     exclusion_list=[0, 404]
 
     help_string="XKCD Archiver\n" \
+                "Version " + version_str + "\n" \
+                 + author_str + ", " + publish_year_str + "\n\n" \
                 "This script archives all xkcd comics directly from the website.\n\n" \
                 "Arguments:\n" \
                 "   -i <n>,    --initial_comic=<n>  Download all comics starting with #<n>.  If this argument is not provided, this script will start with comic #1.\n" \
