@@ -16,7 +16,7 @@ def main(argv):
     exclusion_list=[0, 404]
 
     help_string="XKCD Archiver\n" \
-                "This script archives all XKCD comics directly from the website.\n\n" \
+                "This script archives all xkcd comics directly from the website.\n\n" \
                 "Arguments:\n" \
                 "   -i <n>,    --initial_comic=<n>  Download all comics starting with #<n>.  If this argument is not provided, this script will start with comic #1.\n" \
                 "   -d <path>, --directory=<path>   Output directory for comic archive." \
@@ -42,7 +42,7 @@ def main(argv):
         print("Output directory '" + output_dir + "' is inaccessible or does not exist.")
         sys.exit(2)
 
-    #Archive all XKCD comics starting at i until error (e.g. 404)
+    #Archive all xkcd comics starting at i until error (e.g. 404)
     while(True):
         if(i not in exclusion_list):
             with urllib.request.urlopen("https://xkcd.com/"+str(i)+"/info.0.json") as url:
