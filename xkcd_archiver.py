@@ -9,7 +9,7 @@ import datetime
 from   urllib.parse import urlparse
 import urllib.request, json 
 
-version_str="0.0.1-dev"
+version_str="0.0.1"
 publish_year_str="January 2023"
 author_str="Edward Sandor"
 
