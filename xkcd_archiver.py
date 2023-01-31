@@ -24,15 +24,15 @@ def main(argv):
     #Parse command line arguments
     try:
         opts, args = getopt.getopt(argv,"hi:d:",["help", "initial_comic=", "directory="])
-    except getopt.GetoptError:
-        print("Unrecognized Input!\n")
-        print(help_string)
+    except getopt.GetoptError as err:
+        print(err)
+        print("\n"+help_string)
         sys.exit(22)
 
     for opt, arg in opts:
-       if opt in ('-i', "--initial_comic="): 
+       if opt in ('-i', "--initial_comic"): 
            i = int(arg)
-       if opt in ('-d', "--directory="): 
+       if opt in ('-d', "--directory"): 
            output_dir = arg
        elif opt in ('-h', "--help"): 
            print(help_string)
